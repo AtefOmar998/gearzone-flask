@@ -3,7 +3,7 @@ from flask import Flask, render_template, request
 app = Flask(__name__)
 
 @app.route('/')
-def homepage():
+def home():
     lang = request.args.get('lang', 'en')
     theme = request.args.get('theme', 'light')
     return render_template('index.html', lang=lang, theme=theme)

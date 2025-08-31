@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8" />
+    <title>GearZone - Home</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-white text-gray-900 dark:bg-gray-900 dark:text-white transition duration-300">
+    <nav class="bg-red-600 p-4 flex justify-between items-center text-white">
+        <h1 class="text-xl font-bold">GearZone</h1>
+        <ul class="flex gap-4">
+            <li><a href="#" class="hover:underline">Home</a></li>
+            <li><a href="#" class="hover:underline">Categories</a></li>
+            <li><a href="#" class="hover:underline">Login</a></li>
+            <li><button onclick="toggleLanguage()" class="underline">عربي / English</button></li>
+            <li><button onclick="toggleTheme()" class="underline">🌙</button></li>
+        </ul>
+    </nav>
+
+    <header class="text-center py-10">
+        <h2 class="text-3xl font-bold mb-2" id="welcomeText">Everything your car needs — in one place</h2>
+        <p class="text-gray-500 dark:text-gray-300">Parts, Rentals, Workshops, and more</p>
+    </header>
+
+    <main class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 px-10 pb-10">
+        <div class="bg-white dark:bg-gray-800 p-6 rounded shadow text-center">
+            <h3 class="font-bold text-lg">Body Parts</h3>
+        </div>
+        <div class="bg-white dark:bg-gray-800 p-6 rounded shadow text-center">
+            <h3 class="font-bold text-lg">Mechanic Shops</h3>
+        </div>
+        <div class="bg-white dark:bg-gray-800 p-6 rounded shadow text-center">
+            <h3 class="font-bold text-lg">Paint & Repair</h3>
+        </div>
+        <div class="bg-white dark:bg-gray-800 p-6 rounded shadow text-center">
+            <h3 class="font-bold text-lg">Car Rentals</h3>
+        </div>
+    </main>
+
+    <footer class="bg-gray-200 dark:bg-gray-800 text-center py-4 text-sm text-gray-600 dark:text-gray-300">
+        &copy; 2025 GearZone. All rights reserved.
+    </footer>
+
+    <script>
+        function toggleTheme() {
+            document.body.classList.toggle('dark');
+        }
+
+        function toggleLanguage() {
+            const currentText = document.getElementById('welcomeText').innerText;
+            if (currentText.includes("Everything")) {
+                document.getElementById('welcomeText').innerText = "كل ما تحتاجه سيارتك — في مكان واحد";
+            } else {
+                document.getElementById('welcomeText').innerText = "Everything your car needs — in one place";
+            }
+        }
+    </script>
+</body>
+</html>

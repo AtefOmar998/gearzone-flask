@@ -1,23 +1,56 @@
 <!DOCTYPE html>
 <html lang="{{ lang }}" dir="{{ 'rtl' if lang == 'ar' else 'ltr' }}">
 <head>
-  <meta charset="UTF-8" />
-  <title>GearZone - homepage</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+    <meta charset="UTF-8" />
+    <title>GearZone - Home</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="{{ 'bg-white text-black' if theme == 'light' else 'bg-gray-900 text-white' }} font-sans">
-  <nav class="shadow p-4 flex justify-between items-center {{ 'bg-white' if theme == 'light' else 'bg-gray-800' }}">
-    <h1 class="text-xl font-bold text-red-600">GearZone</h1>
-    <ul class="flex gap-4 text-sm">
-      <li><a href="/?lang={{ lang }}&theme={{ theme }}">{{ 'Home' if lang == 'en' else 'الرئيسية' }}</a></li>
-      <li><a href="/homepage?lang={{ lang }}&theme={{ theme }}">{{ 'Homepage' if lang == 'en' else 'homepage' }}</a></li>
-      <li><a href="/?lang={{ 'ar' if lang == 'en' else 'en' }}&theme={{ theme }}" class="text-blue-600 underline">
-        {{ 'العربية' if lang == 'en' else 'English' }}
-      </a></li>
-    </ul>
-  </nav>
-  <section class="p-6">
-    <h2 class="text-2xl font-bold">{{ 'This is the homepage page.' if lang == 'en' else 'هذه صفحة homepage' }}</h2>
-  </section>
+<body class="{{ 'dark' if theme == 'dark' else 'bg-white text-gray-900' }} transition duration-300">
+    <nav class="bg-red-600 p-4 flex justify-between items-center text-white">
+        <h1 class="text-xl font-bold">GearZone</h1>
+        <ul class="flex gap-4">
+            <li><a href="?lang={{ lang }}&theme={{ theme }}">Home</a></li>
+            <li><a href="#">Categories</a></li>
+            <li><a href="#">Login</a></li>
+            <li><a href="?lang={{ 'ar' if lang == 'en' else 'en' }}&theme={{ theme }}">🌐 {{ 'عربي' if lang == 'en' else 'English' }}</a></li>
+            <li><a href="?lang={{ lang }}&theme={{ 'dark' if theme == 'light' else 'light' }}">{{ '🌙' if theme == 'light' else '☀️' }}</a></li>
+        </ul>
+    </nav>
+
+    <header class="text-center py-10">
+        <h2 class="text-3xl font-bold mb-2">
+            {% if lang == 'en' %}
+                Everything your car needs — in one place
+            {% else %}
+                كل ما تحتاجه سيارتك — في مكان واحد
+            {% endif %}
+        </h2>
+        <p class="text-gray-500 dark:text-gray-300">
+            {% if lang == 'en' %}
+                Parts, Rentals, Workshops, and more
+            {% else %}
+                قطع غيار، تأجير، ورش، والمزيد
+            {% endif %}
+        </p>
+    </header>
+
+    <main class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 px-10 pb-10">
+        <div class="bg-white dark:bg-gray-800 p-6 rounded shadow text-center">
+            <h3 class="font-bold text-lg">{{ 'Body Parts' if lang == 'en' else 'قطع غيار' }}</h3>
+        </div>
+        <div class="bg-white dark:bg-gray-800 p-6 rounded shadow text-center">
+            <h3 class="font-bold text-lg">{{ 'Mechanic Shops' if lang == 'en' else 'ورش ميكانيك' }}</h3>
+        </div>
+        <div class="bg-white dark:bg-gray-800 p-6 rounded shadow text-center">
+            <h3 class="font-bold text-lg">{{ 'Paint & Repair' if lang == 'en' else 'دهان وسمكرة' }}</h3>
+        </div>
+        <div class="bg-white dark:bg-gray-800 p-6 rounded shadow text-center">
+            <h3 class="font-bold text-lg">{{ 'Car Rentals' if lang == 'en' else 'تأجير سيارات' }}</h3>
+        </div>
+    </main>
+
+    <footer class="bg-gray-200 dark:bg-gray-800 text-center py-4 text-sm text-gray-600 dark:text-gray-300">
+        &copy; 2025 GearZone. All rights reserved.
+    </footer>
 </body>
 </html>
