@@ -1,56 +1,83 @@
+<!-- index.html -->
 <!DOCTYPE html>
 <html lang="{{ lang }}" dir="{{ 'rtl' if lang == 'ar' else 'ltr' }}">
 <head>
-    <meta charset="UTF-8" />
-    <title>GearZone - Home</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+  <meta charset="UTF-8">
+  <title>GearZone - Home</title>
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="{{ 'dark' if theme == 'dark' else 'bg-white text-gray-900' }} transition duration-300">
-    <nav class="bg-red-600 p-4 flex justify-between items-center text-white">
-        <h1 class="text-xl font-bold">GearZone</h1>
-        <ul class="flex gap-4">
-            <li><a href="?lang={{ lang }}&theme={{ theme }}">Home</a></li>
-            <li><a href="#">Categories</a></li>
-            <li><a href="#">Login</a></li>
-            <li><a href="?lang={{ 'ar' if lang == 'en' else 'en' }}&theme={{ theme }}">🌐 {{ 'عربي' if lang == 'en' else 'English' }}</a></li>
-            <li><a href="?lang={{ lang }}&theme={{ 'dark' if theme == 'light' else 'light' }}">{{ '🌙' if theme == 'light' else '☀️' }}</a></li>
-        </ul>
-    </nav>
+<body class="{{ 'bg-gray-900 text-white' if theme == 'dark' else 'bg-white text-gray-900' }} transition min-h-screen">
 
-    <header class="text-center py-10">
-        <h2 class="text-3xl font-bold mb-2">
-            {% if lang == 'en' %}
-                Everything your car needs — in one place
-            {% else %}
-                كل ما تحتاجه سيارتك — في مكان واحد
-            {% endif %}
-        </h2>
-        <p class="text-gray-500 dark:text-gray-300">
-            {% if lang == 'en' %}
-                Parts, Rentals, Workshops, and more
-            {% else %}
-                قطع غيار، تأجير، ورش، والمزيد
-            {% endif %}
-        </p>
-    </header>
+  <!-- Top User Greeting -->
+  {% if user %}
+    <div class="text-sm text-right px-6 py-2 {{ 'bg-gray-800 text-white' if theme == 'dark' else 'bg-gray-100 text-gray-800' }}">
+      {% if lang == 'en' %}
+        Welcome, {{ user.name }} ({{ user.type }})
+      {% else %}
+        مرحباً، {{ user.name }} ({{ 'مستخدم' if user.type == 'user' else 'صاحب متجر' }})
+      {% endif %}
+    </div>
+  {% endif %}
 
-    <main class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 px-10 pb-10">
-        <div class="bg-white dark:bg-gray-800 p-6 rounded shadow text-center">
-            <h3 class="font-bold text-lg">{{ 'Body Parts' if lang == 'en' else 'قطع غيار' }}</h3>
-        </div>
-        <div class="bg-white dark:bg-gray-800 p-6 rounded shadow text-center">
-            <h3 class="font-bold text-lg">{{ 'Mechanic Shops' if lang == 'en' else 'ورش ميكانيك' }}</h3>
-        </div>
-        <div class="bg-white dark:bg-gray-800 p-6 rounded shadow text-center">
-            <h3 class="font-bold text-lg">{{ 'Paint & Repair' if lang == 'en' else 'دهان وسمكرة' }}</h3>
-        </div>
-        <div class="bg-white dark:bg-gray-800 p-6 rounded shadow text-center">
-            <h3 class="font-bold text-lg">{{ 'Car Rentals' if lang == 'en' else 'تأجير سيارات' }}</h3>
-        </div>
-    </main>
+  <!-- Navbar -->
+  <nav class="p-4 flex justify-between items-center {{ 'bg-gray-800' if theme == 'dark' else 'bg-red-600 text-white' }}">
+    <h1 class="text-xl font-bold">GearZone</h1>
+    <ul class="flex gap-4 text-sm">
+      <li><a href="/?lang={{ lang }}&theme={{ theme }}">{{ 'Home' if lang == 'en' else 'الرئيسية' }}</a></li>
+      <li><a href="#">{{ 'Categories' if lang == 'en' else 'الأقسام' }}</a></li>
+      <li><a href="/cart?lang={{ lang }}&theme={{ theme }}">{{ 'Cart' if lang == 'en' else 'السلة' }}</a></li>
+      <li><a href="/login?lang={{ lang }}&theme={{ theme }}">{{ 'Login' if lang == 'en' else 'تسجيل الدخول' }}</a></li>
+      <li>
+        <a href="?lang={{ 'ar' if lang == 'en' else 'en' }}&theme={{ theme }}">
+          {{ 'عربي' if lang == 'en' else 'English' }}
+        </a>
+      </li>
+      <li>
+        <a href="?lang={{ lang }}&theme={{ 'dark' if theme == 'light' else 'light' }}">
+          {{ '🌙 Dark' if theme == 'light' else '☀️ Light' }}
+        </a>
+      </li>
+    </ul>
+  </nav>
 
-    <footer class="bg-gray-200 dark:bg-gray-800 text-center py-4 text-sm text-gray-600 dark:text-gray-300">
-        &copy; 2025 GearZone. All rights reserved.
-    </footer>
+  <!-- Hero Section -->
+  <section class="text-center py-12">
+    <h2 class="text-3xl font-bold mb-2">
+      {% if lang == 'en' %}
+        Everything your car needs — in one place
+      {% else %}
+        كل ما تحتاجه سيارتك — في مكان واحد
+      {% endif %}
+    </h2>
+    <p class="text-gray-500 dark:text-gray-300">
+      {% if lang == 'en' %}
+        Body parts, mechanic shops, rentals, paint
+      {% else %}
+        قطع غيار، ورش، تأجير، دهان وسمكرة
+      {% endif %}
+    </p>
+  </section>
+
+  <!-- Categories -->
+  <main class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 px-6 pb-10">
+    <div class="p-6 rounded shadow text-center cursor-pointer {{ 'bg-gray-800' if theme == 'dark' else 'bg-white' }}">
+      <h3 class="font-semibold text-lg">{{ 'Body Parts' if lang == 'en' else 'قطع غيار' }}</h3>
+    </div>
+    <div class="p-6 rounded shadow text-center cursor-pointer {{ 'bg-gray-800' if theme == 'dark' else 'bg-white' }}">
+      <h3 class="font-semibold text-lg">{{ 'Mechanic Shops' if lang == 'en' else 'ورش ميكانيك' }}</h3>
+    </div>
+    <div class="p-6 rounded shadow text-center cursor-pointer {{ 'bg-gray-800' if theme == 'dark' else 'bg-white' }}">
+      <h3 class="font-semibold text-lg">{{ 'Paint & Repair' if lang == 'en' else 'دهان وسمكرة' }}</h3>
+    </div>
+    <div class="p-6 rounded shadow text-center cursor-pointer {{ 'bg-gray-800' if theme == 'dark' else 'bg-white' }}">
+      <h3 class="font-semibold text-lg">{{ 'Car Rentals' if lang == 'en' else 'تأجير سيارات' }}</h3>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="text-center py-4 text-sm {{ 'bg-gray-800 text-gray-300' if theme == 'dark' else 'bg-gray-200 text-gray-600' }}">
+    &copy; 2025 GearZone. {{ 'All rights reserved.' if lang == 'en' else 'جميع الحقوق محفوظة.' }}
+  </footer>
+
 </body>
 </html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="{{ lang }}" dir="{{ 'rtl' if lang == 'ar' else 'ltr' }}">
+<head>
+  <meta charset="UTF-8">
+  <title>{{ 'Sign Up' if lang == 'en' else 'إنشاء حساب' }} - GearZone</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="{{ 'bg-gray-900 text-white' if theme == 'dark' else 'bg-white text-gray-900' }} min-h-screen flex items-center justify-center">
+
+  <div class="w-full max-w-md p-8 rounded shadow-lg {{ 'bg-gray-800' if theme == 'dark' else 'bg-white' }}">
+    
+    <!-- Logo -->
+    <div class="flex justify-center mb-6">
+      <img src="{{ url_for('static', filename='GearZone.png') }}" alt="GearZone Logo" class="h-16">
+    </div>
+
+    <h2 class="text-2xl font-bold mb-4 text-center">
+      {{ 'Create an Account' if lang == 'en' else 'إنشاء حساب جديد' }}
+    </h2>
+
+    <!-- Flash messages -->
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <div class="bg-red-200 text-red-700 p-2 rounded mb-4 text-sm">
+          {{ messages[0] }}
+        </div>
+      {% endif %}
+    {% endwith %}
+
+    <form method="POST" action="{{ url_for('signup', lang=lang, theme=theme) }}">
+      <label class="block mb-2 text-sm">
+        {{ 'Full Name' if lang == 'en' else 'الاسم الكامل' }}
+      </label>
+      <input type="text" name="name" required class="w-full p-2 mb-4 rounded border {{ 'bg-gray-700 text-white' if theme == 'dark' else '' }}">
+
+      <label class="block mb-2 text-sm">
+        {{ 'Email' if lang == 'en' else 'البريد الإلكتروني' }}
+      </label>
+      <input type="email" name="email" required class="w-full p-2 mb-4 rounded border {{ 'bg-gray-700 text-white' if theme == 'dark' else '' }}">
+
+      <label class="block mb-2 text-sm">
+        {{ 'Password' if lang == 'en' else 'كلمة المرور' }}
+      </label>
+      <input type="password" name="password" required class="w-full p-2 mb-4 rounded border {{ 'bg-gray-700 text-white' if theme == 'dark' else '' }}">
+
+      <label class="block mb-2 text-sm">
+        {{ 'User Type' if lang == 'en' else 'نوع المستخدم' }}
+      </label>
+      <select name="type" required class="w-full p-2 mb-6 rounded border {{ 'bg-gray-700 text-white' if theme == 'dark' else '' }}">
+        <option value="user">{{ 'User' if lang == 'en' else 'مستخدم' }}</option>
+        <option value="store">{{ 'Store Owner' if lang == 'en' else 'صاحب متجر' }}</option>
+      </select>
+
+      <button type="submit" class="w-full bg-red-600 text-white py-2 rounded hover:bg-red-700 transition">
+        {{ 'Sign Up' if lang == 'en' else 'تسجيل الحساب' }}
+      </button>
+    </form>
+
+    <p class="mt-4 text-center text-sm">
+      <a href="{{ url_for('login', lang=lang, theme=theme) }}" class="text-red-500 hover:underline">
+        {{ 'Already have an account? Login' if lang == 'en' else 'لديك حساب؟ تسجيل الدخول' }}
+      </a>
+    </p>
+  </div>
+
+</body>
+</html>
